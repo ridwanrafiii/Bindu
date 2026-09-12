@@ -54,12 +54,22 @@ export async function loadDayLog(date: string): Promise<DayLog> {
 }
 
 export async function addWaterEntry(date: string, amountMl: number): Promise<DayLog> {
+  console.log('[storage] addWaterEntry called:', { date, amountMl });
   if (typeof amountMl !== 'number' || isNaN(amountMl) || amountMl <= 0) {
+    console.log('[storage] Invalid amount, returning existing log');
     return loadDayLog(date);
   }
   const log = await loadDayLog(date);
+  console.log('[storage] Current log:', log);
   const updated: DayLog = { ...log, entries: [...log.entries, amountMl] };
+  console.log('[storage] Updated log before save:', updated);
   await AsyncStorage.setItem(KEYS.intake(date), JSON.stringify(updated));
+  console.log('[storage] Saved to AsyncStorage with key:', KEYS.intake(date));
+
+  // Verify it was saved
+  const verification = await AsyncStorage.getItem(KEYS.intake(date));
+  console.log('[storage] Verification read:', verification);
+
   return updated;
 }
 

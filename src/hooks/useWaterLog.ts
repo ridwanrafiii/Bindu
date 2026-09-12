@@ -28,7 +28,9 @@ export function useWaterLog(): UseWaterLogReturn {
   }, []);
 
   const logWater = useCallback(async (amountMl: number) => {
+    console.log('[useWaterLog] Logging water:', amountMl, 'ml for date:', todayString());
     const updated = await addWaterEntry(todayString(), amountMl);
+    console.log('[useWaterLog] Updated log:', updated);
     setLog(updated);
   }, []);
 
