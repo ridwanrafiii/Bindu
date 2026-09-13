@@ -13,10 +13,15 @@ Bindu is a daily water tracking app that combines smart reminders, progress visu
 
 ## Preview
 
-<!-- Replace with actual screenshots -->
-_Screenshots coming soon. Add images of Home screen, History view, and Settings to this section._
 
----
+<p align="center">
+  <img src="./assets/screenshots/home.png" width="30%" />
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <img src="./assets/screenshots/history.png" width="30%" />
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <img src="./assets/screenshots/settings.png" width="30%" />
+</p>
+
 
 ## Why Bindu?
 
