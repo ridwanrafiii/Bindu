@@ -11,7 +11,7 @@ import {
   Linking,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import Svg, { Path, Circle } from 'react-native-svg';
+import Svg, { Path } from 'react-native-svg';
 import { useSettings } from '../hooks/useSettings';
 import { Theme } from '../types';
 import { textStyles, fontSize } from '../theme/typography';
@@ -241,38 +241,60 @@ export default function SettingsScreen() {
         >
           <TouchableOpacity activeOpacity={1} onPress={(e) => e.stopPropagation()}>
             <View style={styles.modalCard}>
-              <View style={styles.devIcon}>
-                <Svg width={48} height={48} viewBox="0 0 24 24" fill="none">
-                  <Circle cx="12" cy="8" r="4" fill="#1A73E8" />
-                  <Path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" stroke="#1A73E8" strokeWidth="2" strokeLinecap="round" />
-                </Svg>
+              {/* Avatar */}
+              <View style={styles.devAvatarRing}>
+                <View style={styles.devAvatarInner}>
+                  <Text style={styles.devAvatarLetter}>R</Text>
+                </View>
               </View>
 
-              <Text style={styles.devTitle}>Developer</Text>
-              <Text style={styles.devName}>RIDWANUR RAHMAN</Text>
+              {/* Header */}
+              <Text style={styles.devLabel}>Made with 💧 by</Text>
+              <Text style={styles.devName}>Ridwanur Rahman Rafi</Text>
 
-              <View style={styles.contactSection}>
-                <Text style={styles.contactLabel}>Contact</Text>
-                <TouchableOpacity
-                  style={styles.emailRow}
-                  onPress={() => Linking.openURL('mailto:ridwanurrahmanrafi@gmail.com')}
-                >
-                  <Svg width={18} height={18} viewBox="0 0 24 24" fill="none">
+              {/* Divider */}
+              <View style={styles.devDivider} />
+
+              {/* Contact Row */}
+              <TouchableOpacity
+                style={styles.devContactRow}
+                activeOpacity={0.7}
+                onPress={() => Linking.openURL('mailto:ridwanurrahmanrafi@gmail.com')}
+              >
+                <View style={styles.devContactIcon}>
+                  <Svg width={16} height={16} viewBox="0 0 24 24" fill="none">
                     <Path
                       d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
-                      stroke="rgba(255,255,255,0.6)"
+                      stroke="#1A73E8"
                       strokeWidth="2"
                       strokeLinecap="round"
                       strokeLinejoin="round"
                     />
-                    <Path d="M22 6l-10 7L2 6" stroke="rgba(255,255,255,0.6)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                    <Path d="M22 6l-10 7L2 6" stroke="#1A73E8" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                   </Svg>
-                  <Text style={styles.emailText}>ridwanurrahmanrafi@gmail.com</Text>
-                </TouchableOpacity>
+                </View>
+                <View style={styles.devContactInfo}>
+                  <Text style={styles.devContactLabel}>Email</Text>
+                  <Text style={styles.devContactValue}>ridwanurrahmanrafi@gmail.com</Text>
+                </View>
+                <Svg width={14} height={14} viewBox="0 0 24 24" fill="none">
+                  <Path d="M9 18l6-6-6-6" stroke="rgba(255,255,255,0.25)" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+                </Svg>
+              </TouchableOpacity>
+
+              {/* App Info */}
+              <View style={styles.devAppInfo}>
+                <Text style={styles.devAppName}>Bindu</Text>
+                <Text style={styles.devAppVersion}>Version 1.0.0</Text>
               </View>
 
-              <TouchableOpacity style={styles.closeButton} onPress={() => setDevModalVisible(false)}>
-                <Text style={styles.closeButtonText}>Close</Text>
+              {/* Close */}
+              <TouchableOpacity
+                style={styles.devCloseBtn}
+                activeOpacity={0.7}
+                onPress={() => setDevModalVisible(false)}
+              >
+                <Text style={styles.devCloseBtnText}>Done</Text>
               </TouchableOpacity>
             </View>
           </TouchableOpacity>
@@ -579,77 +601,115 @@ const styles = StyleSheet.create({
     shadowRadius: 40,
     elevation: 24,
   },
-  devIcon: {
-    width: 72,
-    height: 72,
-    borderRadius: 36,
-    backgroundColor: 'rgba(26,115,232,0.12)',
+  devAvatarRing: {
+    width: 80,
+    height: 80,
+    borderRadius: 40,
+    borderWidth: 2,
+    borderColor: 'rgba(26,115,232,0.35)',
     alignItems: 'center',
     justifyContent: 'center',
     marginBottom: 16,
   },
-  devTitle: {
+  devAvatarInner: {
+    width: 68,
+    height: 68,
+    borderRadius: 34,
+    backgroundColor: 'rgba(26,115,232,0.15)',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  devAvatarLetter: {
+    fontSize: fontSize['2xl'],
+    fontWeight: '700',
+    color: '#1A73E8',
+  },
+  devLabel: {
     fontSize: fontSize.xs,
-    fontWeight: '600',
-    color: 'rgba(255,255,255,0.5)',
-    textTransform: 'uppercase',
-    letterSpacing: 1,
-    marginBottom: 6,
+    fontWeight: '500',
+    color: 'rgba(255,255,255,0.45)',
+    marginBottom: 4,
   },
   devName: {
-    fontSize: fontSize.xl,
+    fontSize: fontSize.lg,
     fontWeight: '700',
     color: palette.white,
     textAlign: 'center',
-    marginBottom: 20,
-    letterSpacing: 0.5,
+    marginBottom: 16,
+    letterSpacing: 0.2,
   },
-  contactSection: {
+  devDivider: {
+    width: 40,
+    height: 2,
+    borderRadius: 1,
+    backgroundColor: 'rgba(255,255,255,0.08)',
+    marginBottom: 16,
+  },
+  devContactRow: {
     width: '100%',
-    backgroundColor: 'rgba(255,255,255,0.04)',
-    borderRadius: 14,
-    padding: 14,
-    borderWidth: 1,
-    borderColor: 'rgba(255,255,255,0.06)',
-    marginBottom: 20,
-  },
-  contactLabel: {
-    fontSize: fontSize.xs,
-    fontWeight: '600',
-    color: 'rgba(255,255,255,0.4)',
-    textTransform: 'uppercase',
-    letterSpacing: 0.5,
-    marginBottom: 10,
-  },
-  emailRow: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 10,
+    backgroundColor: 'rgba(255,255,255,0.04)',
+    borderRadius: 14,
+    paddingVertical: 14,
+    paddingHorizontal: 14,
+    borderWidth: 1,
+    borderColor: 'rgba(255,255,255,0.06)',
+    marginBottom: 16,
+    gap: 12,
   },
-  emailText: {
-    fontSize: fontSize.sm,
-    fontWeight: '500',
-    color: '#1A73E8',
+  devContactIcon: {
+    width: 36,
+    height: 36,
+    borderRadius: 10,
+    backgroundColor: 'rgba(26,115,232,0.12)',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  devContactInfo: {
     flex: 1,
   },
-  closeButton: {
-    width: '100%',
-    backgroundColor: '#EF4444',
-    borderRadius: 16,
-    paddingVertical: 14,
-    paddingHorizontal: 24,
-    alignItems: 'center',
-    shadowColor: '#EF4444',
-    shadowOffset: { width: 0, height: 6 },
-    shadowOpacity: 0.4,
-    shadowRadius: 12,
-    elevation: 8,
+  devContactLabel: {
+    fontSize: fontSize.xs,
+    fontWeight: '500',
+    color: 'rgba(255,255,255,0.4)',
+    marginBottom: 2,
   },
-  closeButtonText: {
+  devContactValue: {
+    fontSize: fontSize.sm,
+    fontWeight: '600',
+    color: '#1A73E8',
+  },
+  devAppInfo: {
+    alignItems: 'center',
+    marginBottom: 20,
+    gap: 2,
+  },
+  devAppName: {
+    fontSize: fontSize.sm,
+    fontWeight: '600',
+    color: 'rgba(255,255,255,0.35)',
+    letterSpacing: 1,
+  },
+  devAppVersion: {
+    fontSize: fontSize.xs,
+    fontWeight: '500',
+    color: 'rgba(255,255,255,0.2)',
+  },
+  devCloseBtn: {
+    width: '100%',
+    backgroundColor: 'rgba(255,255,255,0.06)',
+    borderRadius: 14,
+    paddingVertical: 14,
+    alignItems: 'center',
+    borderWidth: 1,
+    borderColor: 'rgba(255,255,255,0.08)',
+  },
+  devCloseBtnText: {
     fontSize: fontSize.md,
-    fontWeight: '700',
-    color: '#FFFFFF',
-    letterSpacing: 0.5,
+    fontWeight: '600',
+    color: 'rgba(255,255,255,0.7)',
+    letterSpacing: 0.3,
   },
   modalTitle: {
     fontSize: fontSize.xl,
